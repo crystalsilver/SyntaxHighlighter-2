@@ -1,0 +1,20 @@
+[
+    {
+        "id": "selection",
+        "caption": "Selection",
+        "children":
+        [
+            {
+                "id": "highlight",
+                "caption": "Highlight",
+                "children":
+                [
+                    {
+                        "caption": "hightlight in browser",
+                        "command": "hightlight_in_browser"
+                    }
+                ]
+            }
+        ]
+    }
+]
