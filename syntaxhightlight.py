@@ -18,7 +18,6 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
 
     def __init__(self, view):
         self.view = view
-        self.language = self.get_language()
         self.clean_temp()
 
     def clean_temp(self):
@@ -27,8 +26,9 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
 
     def get_language(self):
         syntax = self.view.settings().get('syntax')
+        print(syntax)
         if syntax is not None:
-            return basename(syntax).replace(
+            return os.path.basename(syntax).replace(
                 '.tmLanguage', '').lower().capitalize()
         else:
             return "plain"
@@ -65,7 +65,8 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
                 % (brush, brush.lower(), content))  # redo
 
     def get_brush(self):
-        if self.language in self.BRUSHES:
-            return self.BRUSHES[self.language]
+        language = self.get_language()
+        if language in self.BRUSHES:
+            return self.BRUSHES[language]
         else:
-            return self.language
+            return language
