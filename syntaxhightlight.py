@@ -26,7 +26,6 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
 
     def get_language(self):
         syntax = self.view.settings().get('syntax')
-        print(syntax)
         if syntax is not None:
             return os.path.basename(syntax).replace(
                 '.tmLanguage', '').lower().capitalize()
@@ -38,7 +37,18 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
         Main plugin logic for the 'indent' command.
         """
         webbrowser.open_new_tab("file://" + self.generate_file(
-            self.read_file(self.view.file_name())))
+            self.get_code()))
+
+    def get_code(self):
+        # trying to get selections
+        selection = functools.reduce(
+            lambda a, x: a + self.view.substr(x),
+            self.view.sel(),
+            "")
+        if(selection.strip() != ''):
+            return selection
+        else:
+            return self.view.substr(sublime.Region(0, self.view.size()))
 
     def read_file(self, path):
         handle = open(path, "r")
