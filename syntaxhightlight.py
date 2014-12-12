@@ -14,7 +14,7 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
     TEMP_PATH = EXTENSION_DIR + "temp/"
     SYNTAX_HIGHLIGHTER_PATH = EXTENSION_DIR + "syntaxhighlighter_3.0.83/"
 
-    BRUSHES = {'Javascript': 'JScript'}
+    BRUSHES = {'Javascript': 'JScript', 'Json': 'JScript'}
 
     def __init__(self, view):
         self.view = view
@@ -76,6 +76,7 @@ class HightlightInBrowserCommand(sublime_plugin.TextCommand):
 
     def get_brush(self):
         language = self.get_language()
+        # print(language)
         if language in self.BRUSHES:
             return self.BRUSHES[language]
         else:
